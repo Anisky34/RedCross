@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name = "viewport" content = "width = device-width, initial scale = 1.0">
+    <title>Officer Dashboard- Hillcrest Red Cross</title>
+    <style>
+        body {
+            font-family: "Roboto Light", sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8d7da;;
+        }
+        header {
+            background-color: #d9534f;
+            padding: 15px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #e57373;
+            padding: 10px;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+        nav a {
+            color: black;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+        .dashboard-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        .stat-box {
+            background-color: #d32f2f;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            width: 30%;
+        }
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .action-card {
+            background-color: #f8d7da;;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            width: 48%;
+        }
+        h1, h2, h3 {
+            color: #8B0000;;
+        }
+        button {
+            background-color: #d9534f;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #c9302c;
+        }
+        button.approve {
+            background-color: #5cb85c;
+        }
+        button.approve:hover {
+            background-color: #449d44;
+        }
+        button.reject {
+            background-color: #d9534f;
+        }
+        button.reject:hover {
+            background-color: #d9534f;;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td{
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #e57373;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f8d7da;
+        }
+        .no-requests {
+            text-align: center;
+            padding: 20px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <img src = "redcross_logo.png" alt = "Hillcrest Red Cross" width = "50">
+</header>
+<nav>
+    <a href="/">Home</a>
+    <a href="/about">About Us</a>
+    <a href="/volunteer">Volunteer Opportunities</a>
+    <a href="/donate">Donate Blood</a>
+    <a href="/login">Login</a>
+    <a href = "/signup">Sign Up</a>
+</nav>
+<div class = "container">
+    <h1>Officer Dashboard - <span th:text = "${volunteer.username}">Officer</span></h1>
+    <div class = "dashboard-section">
+        <h2>Your Officer Stats</h2>
+        <div class = "stats">
+            <div class = "stat-box">
+                <h3>Total Hours</h3>
+                <p th:text = "${volunteer.hours}">0</p>
+            </div>
+            <div class = "stat-box">
+                <h3>Role</h3>
+                <p th:text = "${volunteer.role}">OFFICER</p>
+            </div>
+            <div class = "stat-box">
+                <h3>Type</h3>
+                <p th:text = "${volunteer.type}">Hillcrest</p>
+            </div>
+        </div>
+    </div>
+
+    <div class = "dashboard-section">
+        <h2>Hours Approval Requests</h2>
+        <div th:if = "${pendingHours != null and !pendingHours.empty}">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Current Hours</th>
+                        <th>Requested Hours</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each = "hourRequest : ${pendingHours}">
+                        <td th:text = "${hourRequest.volunteer.username}">Username</td>
+                        <td th:text = "${hourRequest.volunteer.email}">email@example.com</td>
+                        <td th:text = "${hourRequest.volunteer.hours}">10</td>
+                        <td th:text = "${hourRequest.hoursReqeusted}">5</td>
+                        <td>
+                            <form th:action = "@{/approve-hours}" method = "post" style = "display: inline;">
+                                <input type = "hidden" name = "requestId" th:value = "${hourRequest.id}">
+                                <input type = "hidden" name = "officerEmail" th:value = "${volunteer.email}">
+                                <button type = "submit" class = "approve">Approve</button>
+                            </form>
+                            <form th:action = "@{/reject-hours}" method = "post" style = "display: inline;">
+                                <input type = "hidden" name = "requestId" th:value = "${hourRequest.id}">
+                                <input type = "hidden" name = "officerEmail" th:value = "${volunteer.email}">
+                                <button type = "submit" class = "reject">Reject</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:if="${pendingHours == null or pendingHours.empty}" class = "no-requests">
+            <p>No pending hour approval requests at this time.</p>
+        </div>
+    </div>
+    <div class="dashboard-section">
+        <h2>Help Requests</h2>
+        <div th:if = "${helpRequests != null and !helpRequests.empty}">
+            <table>
+                <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Request Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each = "helpRequest : ${helpRequests}">
+                        <td th:text = "${helpRequest.volunteer.username}">Username</td>
+                        <td th:text = "${helpRequest.volunteer.email}">email@example.com</td>
+                        <td th:text = "${#temporals.format(helpRequest.requestDate,  'yyyy-MM-dd HH:mm')}">2025-04-01</td>
+                        <td th:text = "${helpRequest.status}">PENDING</td>
+                        <td>
+                            <div style = "margin-bottom: 10px;">
+                                <strong>Message;</strong>
+                                <p th:text = "${helpRequest.message}">Help request message will appear here</p>
+                            </div>
+                            <form th:action = "@{/respond-help}" method = "post">
+                                <input type = "hidden" name = "requestId" th:value = "${helpRequest.id}">
+                                <input type = "hidden" name = "officerEmail" th:value = "${volunteer.email}">
+                                <select name = "status" required>
+                                    <option value = "IN_PROGRESS">Mark as In Progress</option>
+                                    <option value = "RESOLVED">Mark as Resolved</option>
+                                </select>
+                                <textarea name = "response" placeholder= "Add your response..." rows = "2" required></textarea>
+                                <button type = "submit">Submit Response</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class = "dashboard-section">
+            <h2> Manage Volunteers</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Type</th>
+                    <th>Total Hours</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="vol : ${volunteers}">
+                    <td th:text="${vol.username}">Username</td>
+                    <td th:text="${vol.email}">email@example.com</td>
+                    <td th:text="${vol.role}">VOLUNTEER</td>
+                    <td th:text="${vol.type}">Hillcrest</td>
+                    <td th:text="${vol.hours}">10</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
