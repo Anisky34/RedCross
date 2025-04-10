@@ -13,6 +13,10 @@ public class SignUpController {
     @Autowired
     private VolunteerService volunteerService;
 
+    public SignUpController(VolunteerService volunteerService) {
+        this.volunteerService = volunteerService;
+    }
+
     @GetMapping("/signup")
     public String showSignUpForm(Model model) {
         model.addAttribute("navbar", "<nav><ul><li><a href='/'>Home</a></li><li><a href='/about'>About Us</a></li><li><a href='/volunteer'>Volunteer Opportunities</a></li><li><a href='/donate'>Donate Blood</a></li><li><a href='/contact'>Contact Info</a></li><li><a href='/login'>Login</a></li><li><a href='/signup'>Sign Up</a></li></ul></nav>");
@@ -32,22 +36,26 @@ public class SignUpController {
     }
     @PostMapping("/delete-account")
     public String deleteAccount(@RequestParam String email, @RequestParam String password, Model model, RedirectAttributes redirectAttributes) {
-        Volunteer volunteer = volunteerService.findByEmail(email);
-        if (volunteer == null) {
-            redirectAttributes.addFlashAttribute("error", "Account does not exist");
+        try {
+            Volunteer volunteer = volunteerService.findByEmail(email);
+            if (volunteer == null) {
+                redirectAttributes.addFlashAttribute("error", "Account does not exist");
+                return "redirect:/signup";
+            }
+            if (!volunteer.getPassword().equals(password)) {
+                redirectAttributes.addFlashAttribute("error", "Invalid email or password");
+                return "redirect:/signup";
+            }
+            volunteerService.deleteVolunteer(volunteer);
+            redirectAttributes.addFlashAttribute("success", "Your account has been deleted");
+            return "redirect:/signup";
+        } catch (Exception e) {
+            e.printStackTrace();
+            redirectAttributes.addFlashAttribute("error", "Error deleting account: " + e.getMessage());
             return "redirect:/signup";
         }
-        if (!volunteer.getPassword().equals(password)) {
-            redirectAttributes.addFlashAttribute("error", "Invalid email or password");
-            return "redirect:/signup";
-        }
-        volunteerService.deleteVolunteer(volunteer);
-        redirectAttributes.addFlashAttribute("success", "Your account has been deleted");
-        return "redirect:/signup";
     }
 
-
 }
-
 
 
