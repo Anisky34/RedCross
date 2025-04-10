@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - Hillcrest Red Cross</title>
+  <title>Hillcrest Red Cross</title>
   <style>
     body {
       font-family: "Roboto Light", sans-serif;
@@ -12,10 +12,9 @@
       background-color: #f8d7da;
     }
     header {
-      display: flex;
-      align-items: center;
-      padding: 10px 20px;
-      background-color: #f8d7da;
+      background-color: #d9534f;
+      padding: 15px;
+      text-align: center;
     }
     nav {
       display: flex;
@@ -29,62 +28,81 @@
       padding: 10px 20px;
       font-weight: bold;
     }
-    .content-main {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 80vh;
-    }
-    .login-container {
+    .container {
+      max-width: 1000px;
+      margin: 20px auto;
       background-color: white;
       padding: 20px;
       border-radius: 10px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-      text-align: center;
     }
-    input {
-      width: 100%;
+    .section {
+      padding: 20px 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .section:last-child {
+      border-bottom: none;
+    }
+    h2, h3 {
+      color: #d9534f;
+    }
+    .requirements {
+      background-color: #f8f9fa;
       padding: 10px;
+      border-left: 4px solid #d9534f;
       margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
     }
-    button {
-      background-color: #d9534f;
+    footer {
+      background-color: #8B0000;
       color: white;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
     }
-    button:hover {
-      background-color: #c9302c;
-    }
-
   </style>
 </head>
 <body>
-<header>
-  <img src="redcross_logo.png" alt="Hillcrest Red Cross" width="50">
-</header>
 <nav>
   <a href="/">Home</a>
   <a href="/about">About Us</a>
   <a href="/volunteer">Volunteer Opportunities</a>
   <a href="/donate">Donate Blood</a>
   <a href="/login">Login</a>
-  <a href = "/signup">Sign Up</a>
+  <a href="/signup">Sign Up</a>
 </nav>
-<div class = "content-main">
-  <div class="login-container">
-    <h2>Login to Red Cross Portal</h2>
-    <form action="/login" method="post">
-      <input type="email" name="email" placeholder="Enter your email" required>
-      <input type="password" name="password" placeholder="Enter your password" required>
-      <button type="submit">Login</button>
-    </form>
-    <p th:if = "${error}" style = "color: red;" th:text = "${error}"></p>
+<div class="container">
+  <h1>Hillcrest Red Cross</h1>
+
+  <div class="section">
+    <h2>Hillcrest High School officially has a Red Cross Club!</h2>
+    <p>Be Involved With One of the Biggest Non Organization Profits in the World!</p>
+    <p>Come Join Us At Room A307</p>
+  </div>
+
+  <div class="section">
+    <h2>The benefits of joining:</h2>
+    <div class="requirements">
+      <ul>
+        <li>Easy Volunteer Hours</li>
+        <li>Make New Friends</li>
+        <li>Learn About how to Survive in Basic Applications</li>
+        <li>Fun Games to Play</li>
+        <li>Build Your College Resume</li>
+        <li>Help Organize Blood Drives</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>What is Red Cross?</h2>
+    <p>Red Cross is a non profit organization which aims to provide assistance whenever necessary, helping others in times of emergency.</p>
+    <p>Here in Hillcrest, we educate students through activities and games, teaching them how to analyze and react in emergency situations.</p>
   </div>
 </div>
+
+<footer>
+  <h3>More Info:</h3>
+  <p>If you want more information from the Red Cross Website:</p>
+  <a href="https://www.redcross.org" style="color: white;">https://www.redcross.org</a>
+</footer>
 </body>
 </html>
