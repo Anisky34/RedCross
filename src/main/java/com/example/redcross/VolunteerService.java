@@ -53,6 +53,16 @@ public class VolunteerService {
     }
     @Transactional
     public void deleteVolunteer(Volunteer volunteer) {
+        List<HourRequest> approvedRequests = hourRequestRepository.findByApprovedById(volunteer.getId());
+        for (HourRequest request : approvedRequests) {
+            request.setApprovedBy(null);
+            hourRequestRepository.save(request);
+        }
+        List<HelpRequest> handledRequests = helpRequestRepository.findByHandledById(volunteer.getId());
+        for (HelpRequest request : handledRequests) {
+            request.setHandledBy(null);
+            helpRequestRepository.save(request);
+        }
         hourRequestRepository.deleteByVolunteerId(volunteer.getId());
         helpRequestRepository.deleteByVolunteerId(volunteer.getId());
         volunteerRepository.delete(volunteer);
