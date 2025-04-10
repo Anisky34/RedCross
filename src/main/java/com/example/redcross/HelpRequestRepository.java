@@ -9,4 +9,5 @@ public interface HelpRequestRepository extends JpaRepository<HelpRequest, Long> 
     List<HelpRequest> findByStatus(String status);
     List<HelpRequest> findByVolunteerEmail(String email);
     List<HelpRequest> findByStatusNot(String status);
+    List<HelpRequest> findByHandledById(Long handledById);
 }
