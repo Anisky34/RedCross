@@ -36,9 +36,9 @@ public class LoginController {
 
             // Add email as a parameter for the dashboard
             if (role.equals("OFFICER")) {
-                return "redirect:/dashboard?email=" + email;
+                return "redirect:/officer-dashboard?email=" + email;
             } else {
-                return "redirect:/dashboard?email=" + email;
+                return "redirect:/volunteer-dashboard?email=" + email;
             }
 
         } catch (Exception e) {
