@@ -2,121 +2,259 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
-    <title>Volunteer Opportunities - Hillcrest Red Cross</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Dashboard</title>
     <style>
-      body {
-        font-family: "Roboto Light", sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f8d7da;
-      }
-      header {
-        background-color: #d9534f;
-        padding: 15px;
-        text-align: center;
-      }
-      nav {
-        display: flex;
-        justify-content: center;
-        background-color: #e57373;
-        padding: 10px;
-      }
-      nav a {
-        color: black;
-        text-decoration: none;
-        padding: 10px 20px;
-        font-weight: bold;
-      }
-      .container {
-        max-width: 1000px;
-        margin: 20px auto;
-        background-color: white;
-        padding: 20px;
-        border-radius: 10px;
-      }
-      .opportunity {
-        border-bottom: 1px solid #e0e0e0;
-        padding: 20px 0;
-      }
-      .opportunity:last-child {
-        border-bottom: none;
-      }
-      h2 {
-        color: #d9534f;
-      }
-      .requirements {
-        background-color: #f8f9fa;
-        padding: 10px;
-        border-left: 4px solid #d9534f;
-        margin: 10px 0;
-      }
-      footer {
-        background-color: #8B0000;
-        color: white;
-        text-align: center;
-        padding: 15px;
-        margin-top: 20px;
-      }
+        body {
+            font-family: "Roboto", sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8d7da;
+        }
+        header {
+            background-color: #d9534f;
+            padding: 15px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #e57373;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            margin: 0 5px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        nav a:hover {
+            background-color: black;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+        .dashboard-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        .stat-box {
+            background-color: #d32f2f;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            width: 30%;
+        }
+        h1, h2, h3 {
+            color: #8B0000;
+        }
+        button {
+            background-color: #d9534f;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #c9302c;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #e57373;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f8d7da;
+        }
+        /* Fixing unstyled action cards */
+        .action-card {
+            background-color: #fff5f5;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            width: 48%;
+        }
+        footer {
+            background-color: #8B0000;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+        } .signout-button {
+                      position: absolute;
+                      top: 10px;
+                      right: 20px;
+                  }
+        .signout-button a {
+            background-color: #d9534f;
+            color: white;
+            padding: 8px 15px;
+            border: 2px solid white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color .3s;
+        }
+        .signout-button a:hover {
+            background-color: #c9302c;
+        }
     </style>
 </head>
 <body>
+<header>
+    <div class="signout-button">
+        <a href = "/logout">Sign Out</a>
+    </div>
+</header>
 
 <nav>
-  <a href="/">Home</a>
-  <a href="/about">About Us</a>
-  <a href="/volunteer">Volunteer Opportunities</a>
-  <a href="/donate">Donate Blood</a>
-  <a href="/login">Login</a>
-  <a href="/signup">Sign Up</a>
+    <a href="/">Home</a>
+    <a href="/about">About Us</a>
+    <a href="/volunteer">Volunteer Opportunities</a>
+    <a href="/donate">Donate Blood</a>
+    <a href="/login">Login</a>
+    <a href="/signup">Sign Up</a>
 </nav>
-<div class = "container">
-  <h1>Volunteer Opportunities</h1>
-  <p>Volunteering with Hillcrest Red Cross is a rewarding way to give back to our school and the community</p>
-  <div class = "opportunity">
-    <h2>Join Our Club!</h2>
-    <p>Join our club where you can learn anything ranging from how to deal with emergency situations to how to recognize them</p>
 
-    <div class = "requirements">
-      <ul>
-        <li>Attend Hillcrest High School</li>
-        <li>Have your Tuesdays be free from 2:30-3:30</li>
-      </ul>
-    </div>
-  </div>
+<div class="container">
+    <h1>Welcome, <span th:text="${volunteer.username}">Volunteer</span>!</h1>
 
-  <div class = "opportunity">
-    <h2>Blood Drive Volunteer</h2>
-    <p>Help run local blood drives by greeting donors, assisting with registration, and providing refreshments</p>
-    <div class = "requirements">
-      <h3>Requirements</h3>
-      <ul>
-        <li>16 yrs or older</li>
-        <li>Be friendly</li>
-        <li>If you wanna work registration have some basic computer skills</li>
-      </ul>
+    <div class="dashboard-section">
+        <h2>Your Stats</h2>
+        <div class="stats">
+            <div class="stat-box">
+                <h3>Total Hours</h3>
+                <p th:text="${volunteer.hours}">0</p>
+            </div>
+            <div class="stat-box">
+                <h3>Role</h3>
+                <p th:text="${volunteer.role}">Volunteer</p>
+            </div>
+            <div class="stat-box">
+                <h3>Type</h3>
+                <p th:text="${volunteer.type}">Hillcrest</p>
+            </div>
+        </div>
     </div>
-    <p><strong>Time Commitment</strong> 4-6 hour shifts, will happen at school twice this year, elsewhere look at redcross website</p>
-  </div>
-  <div class = "opportunity">
-    <h2>Help with local Redcross building</h2>
-    <p>Assist with the local redcross chapter about .2 miles away from us, you can help them with stuff such as data entry, filing, answering phones, and volunteer schedules</p>
-    <div class = "requirements">
-      <h3>Requirements</h3>
-      <ul>
-        <li>16 or older</li>
-        <li>Basic computer skills</li>
-        <li>Attention to detail</li>
-        <li>Professional communication skills</li>
-      </ul>
+
+    <div class="dashboard-section">
+        <h2>Log Volunteer Hours</h2>
+        <form action="/update-hours" method="post">
+            <input type="hidden" name="email" th:value="${volunteer.email}">
+            <input type="number" name="hours" placeholder="Enter hours" min="1" required>
+            <button type="submit">Submit Hours</button>
+        </form>
     </div>
-    <p><strong>Time Commitment:</strong>4-hour shifts, weekdays after school besides tuesdays come in whenever you want</p>
-  </div>
+
+    <div class="dashboard-section">
+        <h2>Upcoming Events</h2>
+        <div class="actions">
+            <div class="action-card">
+                <h3>Hillcrest Events</h3>
+                <a href="/volunteer">View All Hillcrest Events</a>
+            </div>
+            <div class="action-card">
+                <h3>Red Cross Events</h3>
+                <a href="https://www.redcross.org/volunteer/become-a-volunteer.html" target="_blank">View All Red Cross Events</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-section">
+        <h2>Need Help?</h2>
+        <form action="/request-help" method="post">
+            <input type="hidden" name="email" th:value="${volunteer.email}">
+            <textarea name = "message" placeholder = "Describe what you need help with..." rows = "4" required></textarea>
+            <button type="submit">Request Assistance</button>
+        </form>
+    </div>
+
+    <div class="dashboard-section">
+        <h2>Your Profile</h2>
+        <table>
+            <tr>
+                <th>Username</th>
+                <td th:text="${volunteer.username}">username</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td th:text="${volunteer.email}">email@example.com</td>
+            </tr>
+            <tr>
+                <th>Volunteer Type</th>
+                <td th:text="${volunteer.type}">Hillcrest</td>
+            </tr>
+        </table>
+    </div>
+    <div class = "dashboard-section">
+        <h2>Your Help Requests</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Request Date</th>
+                <th>Status</th>
+                <th>Your Message</th>
+                <th>Officer Response</th>
+                <th>Response Date</th>
+                <th>Handled By</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each = "helpRequest : ${helpRequests}">
+                <td th:text = "${#temporals.format(helpRequest.requestDate, 'yyyy-MM-dd HH:mm')}">2025-04-01</td>
+                <td th:text = "${helpRequest.status}">PENDING</td>
+                <td th:text = "${helpRequest.message}">Your original message</td>
+                <td th:text = "${helpRequest.response != null ? helpRequest.response : 'No response yet'}">Response</td>
+                <td th:text = "${helpRequest.responseDate != null ? #temporals.format(helpRequest.responseDate, 'yyyy-MM-dd HH:mm') : 'N/A'}">2025-04-02</td>
+                <td th:text = "${helpRequest.handledBy != null ? helpRequest.handledBy.username : 'Not assigned'}">Officer</td>
+            </tr>
+
+            </tbody>
+        </table>
+        <div th:if = "${helpRequests == null or helpRequests.empty}" class = "no-requests">
+            <p>You have not submitted any help requests yet.</p>
+        </div>
+    </div>
 </div>
 <footer>
-  <h3>More Info:</h3>
-  <p>If you want more information from the Red Cross Website:</p>
-  <a href="https://www.redcross.org" style="color: white;">https://www.redcross.org</a>
+    <h3>More Info:</h3>
+    <p>If you want more information from the Red Cross Website:</p>
+    <a href="https://www.redcross.org" style="color: white;">https://www.redcross.org</a>
 </footer>
 </body>
 </html>
