@@ -122,12 +122,39 @@
             padding: 20px;
             color: #6c757d;
         }
+        footer {
+            background-color: #8B0000;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        .signout-button {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+        .signout-button a {
+            background-color: #d9534f;
+            color: white;
+            padding: 8px 15px;
+            border: 2px solid white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color .3s;
+        }
+        .signout-button a:hover {
+            background-color: #c9302c;
+        }
     </style>
 </head>
 
 <body>
 <header>
-    <img src = "redcross_logo.png" alt = "Hillcrest Red Cross" width = "50">
+    <div class = "signout-button">
+        <a href = "/logout">Sign Out</a>
+    </div>
 </header>
 <nav>
     <a href="/">Home</a>
@@ -261,5 +288,10 @@
         </div>
     </div>
 </div>
+<footer>
+    <h3>More Info:</h3>
+    <p>If you want more information from the Red Cross Website:</p>
+    <a href="https://www.redcross.org" style="color: white;">https://www.redcross.org</a>
+</footer>
 </body>
 </html>
